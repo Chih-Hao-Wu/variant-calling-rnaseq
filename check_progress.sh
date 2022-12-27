@@ -11,3 +11,6 @@ num_annotated=$(wc -l < .progress/annotated_calls.txt)
 # print counts to line
 printf "Number samples with completed calls: $num_complete \n"
 printf "Fraction samples with annotated calls: $num_annotated/$num_complete \n"
+
+# find difference between annotated and called, return called, unannotated
+diff -u .progress/mutect2_calls.txt .progress/annotated_calls.txt | grep '^-case' | sed 's/-//' > .progress/unannotated_calls.txt 
